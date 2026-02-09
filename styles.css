@@ -1,0 +1,485 @@
+:root {
+  --sand: rgba(255, 255, 255, 0.92);
+  --gold: rgba(255, 255, 255, 0.95);
+
+  /* Indonesia red & white */
+  --green: #c62828;
+  --greenb: #8e0000;
+
+  --red: #b71c1c;
+  --redb: #7f0000;
+
+  --goldb: #ffffff;
+
+  --charcoal: #0b0b0b;
+
+  --blue: #d32f2f;
+  --blueb: #ff5252;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100svh;
+  font-family: "Trebuchet MS", sans-serif;
+  background: var(--charcoal);
+}
+
+button {
+  color: white;
+}
+
+#map {
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+}
+
+.leaflet-container {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#info {
+  position: absolute;
+  top: 78%;
+  left: 20px;
+  background: var(--red);
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 18px;
+  color: white;
+  border: 2px solid var(--redb);
+  z-index: 1000;
+  box-shadow: 0 0 15px rgba(158, 42, 44, 0.7);
+}
+
+/* Score box */
+#score {
+  position: absolute;
+  top: 90%;
+  left: 20px;
+  background: var(--green);
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 18px;
+  color: white;
+  border: 2px solid var(--greenb);
+  z-index: 1000;
+  box-shadow: 0 0 15px rgba(31, 122, 79, 0.7);
+}
+
+#message {
+  position: absolute;
+  top: 84%;
+  left: 20px;
+  background: var(--gold);
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 18px;
+  color: black;
+  border: 2px solid var(--goldb);
+  z-index: 1000;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(212, 158, 23, 0.5);
+}
+
+.correct-marker {
+  color: var(--green);
+  font-weight: bold;
+}
+
+.wrong-marker {
+  color: var(--red);
+  font-weight: bold;
+}
+
+#map img {
+  filter: brightness(3.2) contrast(2) saturate(1.05) hue-rotate(-2deg);
+}
+
+#endScreen {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#endScreen.hidden {
+  display: none;
+}
+
+/* End card */
+.end-card {
+  background: #111;
+  border-radius: 16px;
+  padding: 30px 40px;
+  text-align: center;
+  color: #fff;
+  max-width: 400px;
+  width: 90%;
+  animation: panAfricaPulse 2s infinite ease-in-out;
+  box-shadow:
+    0 0 25px rgba(204, 0, 0, 0.7),
+    0 0 50px rgba(255, 204, 0, 0.6),
+    0 0 75px rgba(0, 153, 0, 0.5);
+}
+
+.end-card h1 {
+  margin-bottom: 15px;
+  font-size: 1.8em;
+  line-height: 1.2;
+}
+
+.end-card p {
+  font-size: 16px;
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
+.end-card button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  background: var(--blue);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background 0.3s,
+    transform 0.2s;
+}
+
+.end-card button:hover {
+  background: var(--blueb);
+  transform: scale(1.05);
+}
+
+@keyframes panAfricaPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 15px rgba(179, 25, 66, 0.8),
+      0 0 30px rgba(255, 255, 255, 0.7),
+      0 0 45px rgba(10, 49, 97, 0.6);
+  }
+  50% {
+    box-shadow:
+      0 0 25px rgba(179, 25, 66, 0.9),
+      0 0 50px rgba(255, 255, 255, 0.8),
+      0 0 70px rgba(10, 49, 97, 0.7);
+  }
+}
+
+#paymentQR {
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--blue);
+  box-shadow: 0 0 12px rgba(0, 188, 212, 0.45);
+  animation: lightningFadeIn 0.4s ease-out;
+}
+
+#paymentQR p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #e0f7fa;
+}
+
+#paymentQR canvas {
+  display: block;
+  margin: 12px auto;
+  border-radius: 8px;
+  background: #fff;
+  padding: 6px;
+}
+
+#paymentQR p:last-child {
+  font-size: 11px;
+  opacity: 0.7;
+  word-break: break-all;
+}
+
+#paymentQR.hidden {
+  display: none;
+}
+
+#paymentQR::before {
+  content: "⚡ Reward";
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+  color: var(--blue);
+  opacity: 0.85;
+}
+
+/* Lightning modal overlay */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 12px;
+}
+
+/* Hidden state */
+.modal.hidden {
+  display: none;
+}
+
+/* Modal card – matches end-card aesthetic */
+.modal-card {
+  background: #111;
+  border-radius: 16px;
+  padding: 20px 16px;
+  width: 90%;
+  max-width: 380px;
+  text-align: center;
+  color: white;
+
+  border: 2px solid var(--goldb);
+  box-shadow:
+    0 0 25px rgba(179, 25, 66, 0.9),
+    0 0 50px rgba(255, 255, 255, 0.8),
+    0 0 70px rgba(10, 49, 97, 0.7);
+
+  animation: lightningModalPulse 2s infinite ease-in-out;
+}
+
+/* Title */
+.modal-card h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.6em;
+  color: var(--goldb);
+}
+
+/* Description text */
+.modal-card p {
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--sand);
+  margin-bottom: 14px;
+}
+
+/* Lightning input */
+.modal-card input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 2px solid var(--blue);
+  background: #000;
+  color: white;
+  font-size: 15px;
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 188, 212, 0.45);
+}
+
+.modal-card input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* Buttons */
+.modal-actions {
+  margin-top: 16px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.modal-actions button {
+  flex: 1;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    background 0.2s;
+}
+
+#enableLightningBtn {
+  background: var(--green);
+  border: 2px solid var(--greenb);
+  color: white;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.7);
+}
+
+#enableLightningBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 22px rgba(218, 249, 255, 0.9);
+}
+
+#skipLightningBtn {
+  background: var(--red);
+  border: 2px solid var(--redb);
+  color: white;
+  box-shadow: 0 0 14px rgba(158, 42, 44, 0.6);
+}
+
+#skipLightningBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 22px rgba(158, 42, 44, 0.85);
+}
+
+@keyframes lightningModalPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 15px rgba(179, 25, 66, 0.8),
+      0 0 30px rgba(255, 255, 255, 0.7),
+      0 0 45px rgba(10, 49, 97, 0.6);
+  }
+  50% {
+    box-shadow:
+      0 0 25px rgba(179, 25, 66, 0.9),
+      0 0 50px rgba(255, 255, 255, 0.8),
+      0 0 70px rgba(10, 49, 97, 0.7);
+  }
+}
+
+#quickPanel {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.panel-btn {
+  background: var(--blue);
+  color: white;
+  border: 2px solid var(--blueb);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    background 0.2s;
+}
+
+.panel-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(0, 188, 212, 0.8);
+  background: var(--blueb);
+}
+
+.popup {
+  position: absolute;
+  bottom: 70px;
+  right: 20px;
+  background: #111;
+  border: 2px solid var(--goldb);
+  border-radius: 12px;
+  padding: 16px 20px;
+  max-width: 250px;
+  color: white;
+  z-index: 1001;
+  box-shadow: 0 0 15px rgba(212, 158, 23, 0.6);
+}
+
+.popup h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: var(--goldb);
+}
+
+.popup ul {
+  padding-left: 18px;
+  margin: 0;
+}
+
+.popup.hidden {
+  display: none;
+}
+
+.popup .closePopup {
+  margin-top: 10px;
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 8px;
+  border: none;
+  background: var(--red);
+  color: white;
+  cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  #info {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
+
+  #score {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
+
+  #message {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
+  .panel-btn {
+    padding: 3px 6px;
+    font-size: 12px;
+  }
+  .modal-card {
+    padding: 16px 12px;
+  }
+
+  .modal-card input {
+    font-size: 14px;
+  }
+
+  .modal-actions button {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+  .leaflet-popup {
+    width: fit-content;
+    font-size: 8px;
+    padding: 0;
+  }
+  .leaflet-popup-wrapper {
+    width: fit-content;
+    font-size: 8px;
+    padding: 0;
+  }
+  .leaflet-popup-content {
+    width: fit-content;
+    font-size: 8px;
+    padding: 1px 20px 1px 7px;
+    margin: 0;
+  }
+  .leaflet-popup-close-button {
+    font-size: 8px;
+    padding: 1px 0px 1px 0px;
+  }
+  #map {
+    transform: scale(2);
+  }
+}

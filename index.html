@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Indonesia Map Quiz</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/png" href="indonesia.png" />
+  </head>
+  <body>
+    <div id="info">Where is <b>Indonesia</b>?</div>
+    <div id="score">Score: 0 | Streak: 0</div>
+    <div id="message">Welcome!</div>
+    <div id="map"></div>
+    <div id="lightningModal" class="modal hidden">
+      <div class="modal-card">
+        <h2>⚡ Earn sats? ⚡</h2>
+        <p>
+          If you want, you can earn sats (provided by your parent or teacher)
+          for correct answers. This is optional.
+        </p>
+        <input
+          id="lightningInput"
+          placeholder="Lightning address (optional)"
+          autocomplete="off"
+        />
+        <div class="modal-actions">
+          <button id="enableLightningBtn">Enable rewards</button>
+          <button id="skipLightningBtn">Just play</button>
+        </div>
+      </div>
+    </div>
+    <div id="endScreen" class="hidden">
+      <div class="end-card">
+        <h1>🎉 Game Complete! 🎉</h1>
+        <p id="finalStats"></p>
+        <div id="paymentQR" class="hidden"></div>
+        <button id="claimRewardBtn">⚡ Claim Lightning Reward ⚡</button>
+        <button id="restartBtn">Play Again</button>
+      </div>
+    </div>
+    <div id="quickPanel">
+      <button class="panel-btn" id="faqBtn">❓ FAQs</button>
+      <button class="panel-btn" id="paymentsBtn">⚡ Rewards</button>
+    </div>
+
+    <div id="faqPopup" class="popup hidden">
+      <h3>FAQs</h3>
+      <ul>
+        <li>Click on the map where you think the state is.</li>
+        <li>After 3 mistakes, hints appear.</li>
+        <li>Score points for correct guesses.</li>
+        <li>Turn on capital mode for a serious challenge. It will begin after your next question.</li>
+        <li>This game was made using OpenStreetMap.</li>
+      </ul>
+      <button class="closePopup">Close</button>
+    </div>
+
+    <div id="paymentsPopup" class="popup hidden">
+      <h3>Payments</h3>
+      <p>You can earn sats from a parent or teacher via Lightning network for correct answers.</p>
+      <p>Your educator can pay these out via WebLN or QR code.</p>
+      <p>You must score at least 10 points by the end of the game and then will recieve one sat for each correct answer.</p>
+      <button class="closePopup">Close</button>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <script src="payments.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
