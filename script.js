@@ -24,6 +24,7 @@ let locations = [
   { name: "Medan", lat: 3.6, lng: 98.7, type: "City" },
   { name: "Denpasar", lat: -8.65, lng: 115.2, type: "City" },
   { name: "Makassar", lat: -5.15, lng: 119.4, type: "City" },
+  { name: "Bandung", lat: -6.9, lng: 107.6, type: "City" },
 
   // --- Major Indonesian Islands ---
   { name: "Sumatra", lat: -0.5, lng: 101.0, type: "Island" },
@@ -69,6 +70,7 @@ let currentCountry = null;
 const tolerancePerCountry = {
   // Cities
   Jakarta: 0.5,
+  Bandung: 0.5,
   Surabaya: 0.5,
   Medan: 0.6,
   Denpasar: 0.3,
