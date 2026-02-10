@@ -105,7 +105,7 @@ function typeIcon(type) {
     {
       City: "🏙️",
       Island: "🏝️",
-      Country: "Indonesia's Neighbors 🌍",
+      Country: "🌍",
     }[type] || "📍"
   );
 }
